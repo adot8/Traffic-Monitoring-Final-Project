@@ -85,28 +85,28 @@ Reviewing the configuration summary to verify the settings, I clicked `Install` 
 
 ![Alt Text](./pic/30.png)
 
+![Alt Text](./pic/31.png)
+
 ### Adding Organizational Units, Groups and Users
 I accessed `Active Directory Users and Computers` by navigating to `Tools` and selecting it. Then, I right clicked on our domain and chose `New`, followed by `Organizational Unit`, where I provided a name for the OU.
-
-![Alt Text](./pic/31.png)
 
 ![Alt Text](./pic/32.png)
 
 ![Alt Text](./pic/33.png)
 
-Next, I right-clicked on the newly created OU, selected `New`, then`Group`, and assigned a name to the group
-
 ![Alt Text](./pic/34.png)
 
-I then created a new user by clicking on the OU, selecting `New`, then `User`, where I specified the user's name, username, and password, ensuring to check the `Password never expires`, option
+Next, I right-clicked on the newly created OU, selected `New`, then`Group`, and assigned a name to the group
 
 ![Alt Text](./pic/35.png)
 
-![Alt Text](./pic/36.png)  ![Alt Text](./pic/37.png)
+![Alt Text](./pic/36.png) 
+
+I then created a new user by clicking on the OU, selecting `New`, then `User`, where I specified the user's name, username, and password, ensuring to check the `Password never expires`, option
+
+![Alt Text](./pic/37.png)  ![Alt Text](./pic/38.png)
 
 To add the user to the group, I right-clicked on the user, went to `Properties`, clicked on the `Member Of`  tab, clicked Add, entered the name of our OU, clicked `Check Names`, and finally clicked `OK`
-
-![Alt Text](./pic/38.png)
 
 ![Alt Text](./pic/39.png) ![Alt Text](./pic/40.png)
 
@@ -122,5 +122,6 @@ Using the `realm discover SOC.LOCAL` command I was able to probe the network to 
 To join the domain, I used the `realm join SOC.LOCAL` command. I verified the integration using the command `id Administrator@SOC.LOCAL` command.
 
 ![Alt Text](./pic/42.png)
+
 
 
