@@ -210,3 +210,10 @@ Syslog messages from Ubuntu2 and vRouter are centrally collected and can be quer
 ![Alt Text](./pic/61.png)
 
 ## Resources
+* https://medium.com/@dannyopara/installing-splunk-enterprise-on-ubuntu-step-by-step-guide-b545982038c3
+* https://www.youtube.com/watch?v=z454piFK8W4
+* https://www.linkedin.com/pulse/how-install-set-up-rsyslog-server-linux-ubuntu-20041-akshay-sharma
+* https://www.server-world.info/en/note?os=Ubuntu_22.04&p=realmd
+* https://github.com/adot8/metro
+* https://docs.snort.org/rules/
+* https://github.com/chrisjd20/Snorpy
