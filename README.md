@@ -27,7 +27,9 @@ For better visualization and analysis, I also installed the Snort dashboard app 
 ![Alt Text](./pic/8.png)
 ### Snort, Syslog Server and Splunk Forwarder on Ubuntu2
 First, I updated Ubuntu2’s repositories and upgraded the packages. Next, I installed Snort on Ubuntu2 with the command `sudo apt install snort`.
+
 ![Alt Text](./pic/9.png)
+
 ### Backup and Customization of Snort Configuration:
 To customize Snort for our specific needs, I backed up the original configuration file located at `/etc/snort/snort.conf` using sudo `cp /etc/snort/snort.conf /etc/snort/snort.conf.back`. Next, I cleared all preconfigured rules from the snort.conf file and verified their removal.
 ![Alt Text](./pic/10.png)
