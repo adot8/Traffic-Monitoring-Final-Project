@@ -70,33 +70,33 @@ First, My partner Swapon accessed the Server Manager from the Start menu. Naviga
 
 ![Alt Text](./pic/23.png)
 
-He chose the default installation type being the role-based or feature-based installation and chose the server where we wanted Active Directory to be installed, being the server, we were using.
+He chose the default installation type being the role-based or feature-based installation and chose the server where we wanted Active Directory to be installed, being the server, he was using.
 
 ![Alt Text](./pic/24.png)
 
-I selected the `Active Directory Domain Services` and `DNS Server` roles from the list of available roles. After being prompted to add any additional features I clicked on `Add Features` and then clicked `Next` at the AD DS page.
+He selected the `Active Directory Domain Services` and `DNS Server` roles from the list of available roles. After being prompted to add any additional features he clicked on `Add Features` and then clicked `Next` at the AD DS page.
 
 ![Alt Text](./pic/25.png)
 
 ![Alt Text](./pic/26.png)  ![Alt Text](./pic/27.png)
 
-I continued with the Post-deployment configuration by clicking on `Promote this server to a domain controller`. 
-Next I created a new forest and named it `SOC.local`
+He continued with the Post-deployment configuration by clicking on `Promote this server to a domain controller`. 
+Next he created a new forest and named it `SOC.local`
 
 ![Alt Text](./pic/28.png)
 
-I then left all other options as default on the Domain Controller Options page and put in our password for the  Directory Services Restore Mode (DSRM).
+He then left all other options as default on the Domain Controller Options page and put in our password for the Directory Services Restore Mode (DSRM).
 
 ![Alt Text](./pic/29.png)
 
-Reviewing the configuration summary to verify the settings, I clicked `Install` to initiate the installation process and waited for that bad boy to finish.
+Reviewing the configuration summary to verify the settings, he clicked `Install` to initiate the installation process and waited for that bad boy to finish.
 
 ![Alt Text](./pic/30.png)
 
 ![Alt Text](./pic/31.png)
 
 ### Adding Organizational Units, Groups and Users
-I accessed `Active Directory Users and Computers` by navigating to `Tools` and selecting it. Then, I right clicked on our domain and chose `New`, followed by `Organizational Unit`, where I provided a name for the OU.
+He accessed `Active Directory Users and Computers` by navigating to `Tools` and selecting it. Then, he right clicked on our domain and chose `New`, followed by `Organizational Unit`, where he provided a name for the OU.
 
 ![Alt Text](./pic/32.png)
 
@@ -104,32 +104,32 @@ I accessed `Active Directory Users and Computers` by navigating to `Tools` and s
 
 ![Alt Text](./pic/34.png)
 
-Next, I right-clicked on the newly created OU, selected `New`, then`Group`, and assigned a name to the group
+Next, he right-clicked on the newly created OU, selected `New`, then`Group`, and assigned a name to the group
 
 ![Alt Text](./pic/35.png)
 
 ![Alt Text](./pic/36.png) 
 
-I then created a new user by clicking on the OU, selecting `New`, then `User`, where I specified the user's name, username, and password, ensuring to check the `Password never expires`, option
+He then created a new user by clicking on the OU, selecting `New`, then `User`, where he specified the user's name, username, and password, ensuring to check the `Password never expires`, option
 
 ![Alt Text](./pic/37.png)  ![Alt Text](./pic/38.png)
 
-To add the user to the group, I right-clicked on the user, went to `Properties`, clicked on the `Member Of`  tab, clicked Add, entered the name of our OU, clicked `Check Names`, and finally clicked `OK`
+To add the user to the group, he right-clicked on the user, went to `Properties`, clicked on the `Member Of`  tab, clicked Add, entered the name of our OU, clicked `Check Names`, and finally clicked `OK`
 
 ![Alt Text](./pic/39.png) ![Alt Text](./pic/40.png)
 
 ## Domain Joining the Ubuntu Machines
-I followed this guide, https://www.server-world.info/en/note?os=Ubuntu_22.04&p=realmd, to join our Ubuntu machines to the domain. The guide provided detailed steps for the entire process. 
+We followed this guide, https://www.server-world.info/en/note?os=Ubuntu_22.04&p=realmd, to join our Ubuntu machines to the domain. The guide provided detailed steps for the entire process. 
 ### Installing packages:
-I ran the following command to install the packages required to join our Ubuntu machines to the domain: `apt -y install realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit`
+We ran the following command to install the packages required to join our Ubuntu machines to the domain: `apt -y install realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit`
 ### Update DNS Settings:
-Configuring the Domain Controller as the machines DNS sever is needed to join the machine to the domain. I did this through the settings GUI like so.
+Configuring the Domain Controller as the machines DNS sever is needed to join the machine to the domain. We did this through the settings GUI like so.
 
 ![Alt Text](./pic/41.png)
 
 ### Discover and Join the Active Directory Domain
-Using the `realm discover SOC.LOCAL` command I was able to probe the network to find the Active Directory domain configuration details, including its realm name, domain name, and server software.
-To join the domain, I used the `realm join SOC.LOCAL` command. I verified the integration using the command `id Administrator@SOC.LOCAL` command.
+Using the `realm discover SOC.LOCAL` command we were able to probe the network to find the Active Directory domain configuration details, including its realm name, domain name, and server software.
+To join the domain, we used the `realm join SOC.LOCAL` command. We finally verified the integration using the command `id Administrator@SOC.LOCAL` command.
 
 ![Alt Text](./pic/42.png)
 
