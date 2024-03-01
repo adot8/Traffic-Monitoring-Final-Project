@@ -48,23 +48,29 @@ After configuring the rule and adding our rule to the snort.conf file, I conduct
 ![Alt Text](./pic/17.png)
 ### Enabling and Configuring Rsyslog:
 I enabled and started the rsyslog service using `sudo systemctl enable rsyslog`, uncommented the TCP and UDP reception lines in the configuration file located at `/etc/rsyslog.conf`, and included a line to create a folder for the syslog client based on its IP address. I also opened the ports 514 for both transport protocols on the host firewall with the command `sudo ufw allow 514/tcp` and `sudo ufw allow 514/udp`.
+
 ![Alt Text](./pic/rsyslog.png)
+
 ![Alt Text](./pic/18.png)
 ### Installing and Configuring Splunk Forwarder:
 Like the Splunk server setup with starting the service and accepting the license, I installed the Splunk forwarder on Ubuntu2. I added the Splunk server as a forwarder using the command `./splunk add forward-server 192.168.1.100:9997`. Additionally, I configured the forwarder to monitor Apache2, Snort alerts, and syslog logs using the command `./splunk add monitor <log location>`. Source names for each log were added in the `/opt/splunkforwarder/etc/apps/search/local/inputs.conf` file.
+
 ![Alt Text](./pic/19.png)
 ![Alt Text](./pic/20.png)
 ### Creating Automation Script:
 To ease the process of running Snort and Splunk, I created a simple bash script that could execute both commands with a single command. This script was then added as a cronjob to ensure it ran automatically on boot by running `crontab -e` followed by `@reboot sudo (name_of_script)`
+
 ![Alt Text](./pic/21.png)
+
 ![Alt Text](./pic/22.png)
+
 ## Setting up Active Directory and DNS services on Windows Server 2019
 ## Installing Active Directory and DNS:
-First, I accessed the Server Manager from the Start menu. Navigating to `Manage`, I selected `Add Roles` and Features to get the setup process started.
+First, My partner Swapon accessed the Server Manager from the Start menu. Navigating to `Manage`, he selected `Add Roles` and Features to get the setup process started.
 
 ![Alt Text](./pic/23.png)
 
-I chose the default installation type being the role-based or feature-based installation and chose the server where I wanted Active Directory to be installed, being the server, I was using.
+He chose the default installation type being the role-based or feature-based installation and chose the server where we wanted Active Directory to be installed, being the server, we were using.
 
 ![Alt Text](./pic/24.png)
 
@@ -118,7 +124,9 @@ I followed this guide, https://www.server-world.info/en/note?os=Ubuntu_22.04&p=r
 I ran the following command to install the packages required to join our Ubuntu machines to the domain: `apt -y install realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit`
 ### Update DNS Settings:
 Configuring the Domain Controller as the machines DNS sever is needed to join the machine to the domain. I did this through the settings GUI like so.
+
 ![Alt Text](./pic/41.png)
+
 ### Discover and Join the Active Directory Domain
 Using the `realm discover SOC.LOCAL` command I was able to probe the network to find the Active Directory domain configuration details, including its realm name, domain name, and server software.
 To join the domain, I used the `realm join SOC.LOCAL` command. I verified the integration using the command `id Administrator@SOC.LOCAL` command.
