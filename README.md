@@ -123,5 +123,90 @@ To join the domain, I used the `realm join SOC.LOCAL` command. I verified the in
 
 ![Alt Text](./pic/42.png)
 
+![Alt Text](./pic/43.png)
 
+## SplunkForwarder Setup on Windows 10
+### Downloading and Installing:
+I downloaded the MSI package for the Splunk Forwarder onto the Windows 10 machine.
+Following the basic installation wizard, I went ahead with the installation process, providing an Admin username and password along with accepting the license.
+During the configuration process, I provided the receiving indexer's IP address, which in our case was 192.168.1.100, Ubuntu1.
 
+![Alt Text](./pic/44.png) ![Alt Text](./pic/45.png)
+
+### Adding Local Windows Logs:
+After the installation, I added the local Windows logs that I wanted to send to the server into the `C:\Program Files\splunkforwarder\etc\apps\search\local\inputs.conf` file of the Splunk Forwarder.
+This step ensured that relevant logs were being sent to the Splunk server for analysis and monitoring
+
+![Alt Text](./pic/46.png)
+
+## Honeypot DHCP Server  and Syslog Configuration on vRouter
+### Configuring DHCP Pool:
+For testing and honeypot functionalities, I created a DHCP pool named "LOCAL" on the vRouter which is a Cisco IOS router. To keep control over network assignment and ensure specific addresses remain untouched, I excluded the following IP addresses in the screenshot. I then configured the network range of the pool as `192.168.1.0/24`. The output of the `show run | s dhcp` command is also all the commands I ran for the DHCP server setup.
+
+![Alt Text](./pic/47.png)
+
+### Configuring vRouter Syslog Messages Forwarding:
+I configured vRouter to send its syslog messages to 192.168.1.101 (ubuntu2). Syslog messages were set to be sent up to the notifications level. This ensures that important system notifications and events are captured and sent. The output of the `show run | s logging` command is also all the commands I ran to forward the logs.
+
+![Alt Text](./pic/48.png)
+
+## Simulating Attacks with Kali and METRO!
+### METRO!!:
+I created a bash script to automate the execution of the simulated attacks, aiming to make them more beginner-friendly for others (script kiddies). The script simplifies the execution of multiple attacks, offering an approachable environment for both testing and educational purposes. 
+Usage of `METRO!!` was made to be simple. Download, install and choose an attack. Simple. A short installation and usage guide has been provided in the repository. 
+
+![Alt Text](./pic/49.png)
+
+![Alt Text](./pic/50.png)
+
+### Simulated Attack List:
+aaa
+
+## Metro Boomin Make it Boom
+Out of the 5 attacks I will show one of them in action, being attack 4 MITM Arp Poisoning via Bettercap
+### Better no cap
+We first start the splunkforwarder and snort on our Ubuntu2 machine using the previous bash script we wrote. We can also watch the alerts in real time with the command `tail -f /var/log/snort/alert`.
+
+![Alt Text](./pic/51.png)
+
+Next we run metro on the attacker machine with the command `sudo ./metro -i eth0`.  We then choose option 4 and input the target IP, in this case it will be the Windows 10 machine at 192.168.1.110
+
+![Alt Text](./pic/52.png)
+
+Immediately, alerts for an `Attempted Arp cache overwrite attack` fill the terminal on Ubuntu2.
+
+![Alt Text](./pic/53.png)
+
+Next, we visit a completely secure login page on the Windows 10 machine and put our credentials in.
+
+![Alt Text](./pic/54.png)
+
+We end up sniffing the POST request and successfully capturing the credentials.
+
+![Alt Text](./pic/55.png)
+
+We ended up being successful as the attacker, but more importantly successful at monitoring the traffic in the network and notifying about the attack taking place. However we didn’t stop it…
+
+![Alt Text](./pic/56.png)
+
+## Final Results
+### Snort Dashboard:
+The Snort dashboard provides insights into network intrusion attempts and suspicious activities. It displays the total number of events detected, their types, and the devices involved.
+
+![Alt Text](./pic/57.png)
+
+### Windows SOC Dashboard:
+The Windows SOC dashboard offers visibility into authentication events on Windows hosts within the network. It highlights successful and unsuccessful local NTLM logins, domain account activities, and other relevant information. 
+
+![Alt Text](./pic/58.png)
+
+![Alt Text](./pic/59.png)
+
+### Syslog Message Querying:
+Syslog messages from Ubuntu2 and vRouter are centrally collected and can be queried on the Splunk server. By filtering with `sourcetype=cisco.ios` and `sourcetype=syslog`, administrators can easily retrieve and analyze syslog data, gaining insights into network device activities and system events.
+
+![Alt Text](./pic/60.png)
+
+![Alt Text](./pic/61.png)
+
+## Resources
